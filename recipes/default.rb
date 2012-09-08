@@ -83,3 +83,20 @@ ruby_block "initialize_rbenv" do
 
   action :nothing
 end
+
+directory "#{node[:rbenv][:root]}/plugins" do
+  owner "rbenv"
+  group "rbenv"
+  mode "0775"
+end
+
+node[:rbenv][:plugins].each do |name, plugin|
+  git "#{node[:rbenv][:root]}/plugins/#{name}" do
+    repository plugin[:repository]
+    reference plugin[:revision]
+    user "rbenv"
+    group "rbenv"
+    action :sync
+  end
+end
+
