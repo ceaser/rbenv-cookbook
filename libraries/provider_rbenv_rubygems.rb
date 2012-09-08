@@ -40,14 +40,15 @@ class Chef
           end
         end
 
-        attr_reader :gem_binary_path
-
         def initialize(new_resource, run_context = nil)
           super
-          @gem_binary_path = gem_binary_path_for(new_resource.ruby_version)
           @gem_env = RbenvGemEnvironment.new(gem_binary_path, new_resource.ruby_version)
         end
-
+        
+        def gem_binary_path
+          gem_binary_path_for(new_resource.ruby_version)
+        end
+        
         def install_package(name, version)
           install_via_gem_command(name, version)
           rbenv_command("rehash")
