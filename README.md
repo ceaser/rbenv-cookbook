@@ -37,6 +37,15 @@ If you'd like a specific Ruby installed by rbenv to include a Gem, say bundler, 
       ruby_version "1.9.3-p194"
     end
 
+## Installing a rbenv plugin
+
+To install a rbenv plugin use the `rbenv_plugin` LWRP
+
+    rbenv_plugin "rbenv-vars" do
+      repository "https://github.com/sstephenson/rbenv-vars.git"
+      revision "master"
+    end
+
 Be sure to include a value for the `ruby_version` attribute so the gem is installed for the correct Ruby
 
 # Attributes
